@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Course exports and outputs never belong in this repository.
+# Only the synthetic sample course under examples/ is tracked.
+*.imscc
+!examples/**/*.imscc
+course_model.json
+!examples/**/course_model.json
+out/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

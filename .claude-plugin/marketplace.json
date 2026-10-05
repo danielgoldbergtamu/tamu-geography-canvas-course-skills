@@ -1,0 +1,15 @@
+{
+  "name": "tamu-geography-canvas-course-skills",
+  "description": "Claude skills for checking and improving Canvas courses from a course export.",
+  "owner": {
+    "name": "Daniel W. Goldberg",
+    "email": "daniel.goldberg@tamu.edu"
+  },
+  "plugins": [
+    {
+      "name": "canvas-course-tools",
+      "source": "./plugins/canvas-course-tools",
+      "description": "Read a Canvas course export and check its sequencing, Bloom levels, rubric and outcome alignment, and accessibility."
+    }
+  ]
+}

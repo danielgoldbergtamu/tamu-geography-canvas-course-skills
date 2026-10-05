@@ -1,0 +1,15 @@
+{
+  "name": "canvas-course-tools",
+  "displayName": "Canvas Course Tools",
+  "version": "0.0.1",
+  "description": "Read a Canvas course export and check its sequencing, Bloom levels, rubric and outcome alignment, and accessibility.",
+  "author": {
+    "name": "Daniel W. Goldberg",
+    "email": "daniel.goldberg@tamu.edu",
+    "url": "https://github.com/danielgoldbergtamu"
+  },
+  "homepage": "https://github.com/danielgoldbergtamu/tamu-geography-canvas-course-skills",
+  "repository": "https://github.com/danielgoldbergtamu/tamu-geography-canvas-course-skills",
+  "license": "MIT",
+  "keywords": ["canvas", "imscc", "course-design", "accessibility", "blooms-taxonomy", "learning-outcomes", "rubrics"]
+}

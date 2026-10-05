@@ -1,0 +1,4 @@
+* text=auto eol=lf
+*.imscc binary
+*.zip binary
+*.png binary
