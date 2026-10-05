@@ -32,16 +32,32 @@ ASSIGNMENTS = [
     ("a07", "Project Draft", "2026-11-12T05:59:00", 40, "online_upload", "gC", "r03", "unpublished"),
     ("a08", "Final Project", "2026-12-10T05:59:00", 100, "online_upload", "gC", "r03", "unpublished"),
 ]
+# Assignment bodies. Each carries a known Bloom level (see PLANTED.md); a04 and a06 have
+# no usable verb on purpose and must come out "unknown".
+INSTRUCTIONS = {
+    "a01": "<p>Summarize the reading on coordinate systems in one paragraph.</p>",
+    "a02": "<p>Convert ten street addresses to latitude and longitude using the provided tool.</p>",
+    "a03": "<p>Explain in your own words why two maps of the same town can disagree.</p>",
+    "a05": "<p>Describe the spatial question your project will investigate and the data you will need.</p>",
+    "a07": "<p>Analyze your data and break the question into the steps your method will take.</p>",
+    "a08": "<p>Evaluate your results and recommend what the client should do next.</p>",
+}
 GROUPS = [("gA", "Participation", 1, 20.0), ("gB", "Labs", 2, 30.0), ("gC", "Project", 3, 50.0)]
 PAGES = [
     ("p01", "welcome", "Welcome to SAMP 101", "active",
      '<p>Start here. This course meets twice a week.</p>'
      '<p>Read <a href="https://canvas.example.edu/courses/12345/pages/study-tips">the study tips page</a> before class.</p>'),
     ("p02", "lecture-1-what-is-a-coordinate", "Lecture 1: What Is a Coordinate?", "active",
-     "Latitude, longitude and why a coordinate needs a datum."),
+     '<p>Latitude, longitude and why a coordinate needs a datum.</p>'
+     '<h3>Learning objectives</h3><p>By the end of this lecture you will be able to:</p>'
+     '<table><tr><th>Objective</th><th>Outcome</th></tr>'
+     '<tr><td>Define latitude and longitude</td><td>CLO1</td></tr>'
+     '<tr><td>Explain why a coordinate needs a datum</td><td>CLO1</td></tr></table>'),
     ("p03", "lecture-2-datums", "Lecture 2: Datums", "active", "Datums and why two coordinates for one place can differ."),
     ("p04", "lecture-3-projections", "Lecture 3: Projections", "active",
      '<p>Projections, distortion and choosing a projection for a task.</p>'
+     '<h3>Learning objectives</h3><ul><li>Distinguish conformal from equal-area projections</li>'
+     '<li>Justify a projection choice for a given task</li></ul>'
      '<img src="$IMS-CC-FILEBASE$/projection.png">'
      '<h4>Further reading</h4>'
      '<p>For the projection table, <a href="https://epsg.org/">click here</a>.</p>'
@@ -167,7 +183,8 @@ def files():
             f'<due_at>{due}</due_at><lock_at/><unlock_at/><assignment_group_identifierref>{grp}</assignment_group_identifierref>'
             f'<workflow_state>{state}</workflow_state>{rubric}<points_possible>{pts}</points_possible>'
             f'<grading_type>points</grading_type><submission_types>{sub}</submission_types><peer_reviews>false</peer_reviews></assignment>\n')
-        out[f"{aid}/body.html"] = f'<html><head><title>{title}</title></head><body><p>Instructions for {title}.</p></body></html>\n'
+        body = INSTRUCTIONS.get(aid, f"<p>Instructions for {title}.</p>")
+        out[f"{aid}/body.html"] = f'<html><head><title>{title}</title></head><body>{body}</body></html>\n'
     out["q01/assessment_meta.xml"] = (
         f'<?xml version="1.0" encoding="UTF-8"?>\n<quiz identifier="q01" {NS}><title>Projection Check</title>'
         '<description>&lt;p&gt;Five-minute check on projections.&lt;/p&gt;</description><quiz_type>assignment</quiz_type>'

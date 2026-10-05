@@ -19,7 +19,7 @@ alone: anything Canvas does not export is inferred and reported with its evidenc
 |---|---|---|
 | `reading-canvas-exports` | Turns a Canvas export into one `course_model.json` file that the other skills read, inferring meeting times, holidays and time zone from the export itself | Available in 0.1.0 |
 | `checking-course-sequence` | Builds a graph of pages, assignments, lectures, activities and labs, and checks that nothing is due before it is taught, that syllabus dates match Canvas, and that every link works | Available in 0.1.0 |
-| `tagging-bloom-levels` | Proposes a Bloom's level for every lecture, assignment, activity and lab, and checks that each outcome climbs | Planned |
+| `tagging-bloom-levels` | Proposes a Bloom's level for every lecture, lab, activity and assignment, links each to the outcomes it measures, checks that each outcome climbs, and keeps a column for the instructor to confirm each level | Available in 0.2.0 |
 | `aligning-rubrics-to-outcomes` | Reads or drafts rubrics and links rubric to assignment to course outcome to program outcome | Planned |
 | `fixing-canvas-accessibility` | Scans every page, writes a fix plan, applies it, and repackages the course for import | Planned |
 | `updating-course-dates` | Moves last term's course to a new term: maps every deadline, unlock date and written date onto the new term's class meetings, skipping holidays, and repackages the course for import | Planned |

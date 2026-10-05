@@ -29,7 +29,8 @@ exactly what a skill should find. Change this file in the same commit as the bui
 | 3 | Graded assignment with no rubric | Lab 2: Projections | aligning-rubrics-to-outcomes |
 | 4 | Rating levels hidden | The Lab rubric has `free_form_criterion_comments` true | aligning-rubrics-to-outcomes |
 | 5 | Outcome never measured | CLO2 and Teamwork are linked to no rubric criterion | aligning-rubrics-to-outcomes |
-| 6 | No Bloom's level is stated anywhere | Every page and assignment | tagging-bloom-levels |
+| 6 | An outcome that does not climb | CLO1 is measured by Reading Response 1 (Summarize: Understand) and Reading Response 2 (Explain: Understand), so it never moves above Understand | tagging-bloom-levels |
+| 6a | Items with no usable verb | Lecture 2, Lecture 4, Lab 2: Projections, Participation 1, the Projection Check quiz and the datum discussion must come out **unknown** and be listed for a person to decide; none may be guessed. The Welcome page is a general page and must not be warned about | tagging-bloom-levels |
 | 7 | Image with no alt text | Lecture 3 page | fixing-canvas-accessibility |
 | 8 | Skipped heading level (h2 then h4) | Lecture 3 page | fixing-canvas-accessibility |
 | 9 | Link text that does not say where it goes ("click here") | Lecture 3 page | fixing-canvas-accessibility |
@@ -41,6 +42,14 @@ exactly what a skill should find. Change this file in the same commit as the bui
 | 15 | Link into one specific Canvas course | The Welcome page links to `canvas.example.edu/courses/12345/...` | checking-course-sequence |
 
 ## Correct patterns that must NOT be reported
+
+- CLO3 climbs: Project Proposal (Describe: Understand), Project Draft (Analyze), Final
+  Project (Evaluate, Recommend: Evaluate). It must not be reported as flat or falling.
+- Lecture 1 states its objectives in a table (Define: Remember; Explain: Understand), so
+  its level is Understand with high confidence. Lecture 3 states them in a list
+  (Distinguish: Analyze; Justify: Evaluate), so its level is Evaluate with high confidence.
+- Lab 1 says "Convert", so it is Apply with medium confidence (instructions, not
+  objectives).
 
 - The Reading Response rubric has an outcome criterion worth 0 points with
   `ignore_for_scoring` true. That is the right way to link a rubric to an outcome without

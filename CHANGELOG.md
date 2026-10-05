@@ -10,6 +10,34 @@ numbers follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-05
+
+### Added
+
+- `tagging-bloom-levels` skill. Proposes a revised Bloom's taxonomy level for every
+  lecture, lab, activity, assignment, quiz and discussion from the verbs its objectives
+  and instructions open with, with high, medium or low confidence and the line it was
+  read from. Items with no listed verb are reported as unknown, never guessed; Claude
+  then reads each one and proposes a level with a reason for the instructor to confirm.
+  Links assessed items to course and program outcomes through rubric criteria and Canvas
+  alignments, and checks that every outcome climbs. Writes `bloom_levels.csv` with a
+  `confirmed_level` column; rerun with `--levels` to use the instructor's levels.
+- `assets/bloom_verbs.json`: the verb table, with seventeen verbs excluded because
+  published lists disagree on their level, each with its reason.
+
+### Changed
+
+- `reading-canvas-exports`: table cells in page text are separated by a tab, so an
+  objective in one cell no longer runs into the outcome code in the next.
+- The sample course has learning objectives and instructions with known levels: one
+  outcome that does not climb, one that climbs, and six items with no usable verb.
+
+### Known limits
+
+- On a real course, this skill and an independently built verb-based tagger agreed on the
+  exact level for 35% of assignments. Proposed levels are a starting point for the
+  instructor, not a measurement.
+
 ## [0.1.0] - 2026-10-05
 
 The first release meant for other people to use.

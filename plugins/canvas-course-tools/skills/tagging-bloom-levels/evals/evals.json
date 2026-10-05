@@ -1,0 +1,23 @@
+{
+  "skill_name": "tagging-bloom-levels",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Can you tag the Bloom's levels in my course and tell me if my outcomes build up over the semester?",
+      "files": ["examples/sample-course/sample-course.imscc"],
+      "expected_output": "Runs tag_bloom.py without asking for anything. Reports that CLO1 does not climb (Reading Responses 1 and 2 are both Understand), that CLO3 climbs from Understand to Evaluate, and that CLO2 and Teamwork are not measured by any item. Lists the unknown items (Lecture 2, Lecture 4, Lab 2, Participation 1, the Projection Check quiz and the datum discussion) as a numbered list with a level Claude proposes for each and a one-line reason, written to the note column and not to confirmed_level. Says every level is a proposal until the instructor confirms it."
+    },
+    {
+      "id": 2,
+      "prompt": "Lab 2 is Apply and Lecture 2 is Understand. Update it.",
+      "files": ["examples/sample-course/sample-course.imscc"],
+      "expected_output": "Writes Apply and Understand into confirmed_level for those two rows of bloom_levels.csv, reruns with --levels, and reports the confirmed count and any change to outcome progression. Changes no other row's confirmed_level."
+    },
+    {
+      "id": 3,
+      "prompt": "What Bloom's level is Lecture 3 and why?",
+      "files": ["examples/sample-course/sample-course.imscc"],
+      "expected_output": "Answers Evaluate, proposed with high confidence because 'Justify a projection choice for a given task' opens a line in its learning-objectives list; notes the list also has 'Distinguish' (Analyze) and the highest level wins. Says it is a proposal, not confirmed."
+    }
+  ]
+}

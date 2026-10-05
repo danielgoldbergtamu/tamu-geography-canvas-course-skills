@@ -1,0 +1,30 @@
+{
+  "about": "Verbs that place a learning objective at a level of the revised Bloom's taxonomy (Anderson and Krathwohl, 2001). A verb is listed only where common published lists agree on its level. Matching takes the highest level found, so a verb admitted at the wrong level outranks every correct verb below it; when in doubt, a verb is excluded rather than guessed.",
+  "levels": [
+    {"level": 1, "name": "Remember", "verbs": ["define", "list", "name", "recall", "recognize", "label", "memorize", "repeat", "state", "reproduce", "quote", "retrieve"]},
+    {"level": 2, "name": "Understand", "verbs": ["summarize", "paraphrase", "interpret", "explain", "describe", "discuss", "restate", "exemplify", "clarify", "infer", "predict", "translate"]},
+    {"level": 3, "name": "Apply", "verbs": ["apply", "use", "implement", "execute", "solve", "compute", "calculate", "operate", "run", "perform", "practice", "demonstrate", "convert", "measure", "carry out", "georeference", "geocode", "digitize", "query"]},
+    {"level": 4, "name": "Analyze", "verbs": ["analyze", "differentiate", "distinguish", "organize", "attribute", "deconstruct", "examine", "break down", "diagnose", "investigate", "decompose", "debug", "troubleshoot", "dissect", "integrate"]},
+    {"level": 5, "name": "Evaluate", "verbs": ["evaluate", "judge", "critique", "assess", "justify", "defend", "argue", "appraise", "decide", "recommend", "prioritize", "verify", "validate", "weigh", "rank"]},
+    {"level": 6, "name": "Create", "verbs": ["create", "design", "compose", "construct", "develop", "formulate", "generate", "plan", "devise", "invent", "author", "synthesize", "hypothesize", "propose"]}
+  ],
+  "excluded": {
+    "compare": "placed at Understand, Analyze and Evaluate by different published lists",
+    "check": "an everyday instruction ('check your work') far more often than Evaluate's 'checking'",
+    "select": "placed at Remember, Apply and Evaluate by different lists",
+    "choose": "placed at Remember, Apply and Evaluate by different lists",
+    "write": "covers everything from writing down a term (Remember) to writing an essay (Create)",
+    "build": "placed at Apply and Create by different lists",
+    "map": "in a geography course a map is a product, not a cognitive level",
+    "identify": "placed at Remember and Analyze by different lists",
+    "classify": "placed at Understand and Analyze by different lists",
+    "report": "describes delivery, not thinking",
+    "present": "describes delivery, not thinking",
+    "read": "an activity, not an objective",
+    "review": "placed at Understand and Evaluate by different lists",
+    "test": "placed at Apply and Evaluate by different lists",
+    "outline": "placed at Understand, Analyze and Create by different lists",
+    "illustrate": "placed at Understand and Apply by different lists",
+    "produce": "placed at Apply and Create by different lists"
+  }
+}

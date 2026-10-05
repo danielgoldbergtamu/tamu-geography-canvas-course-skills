@@ -125,6 +125,8 @@ class _TextExtractor(html.parser.HTMLParser):
             self.skip += 1
         elif tag in self.BLOCK:
             self.parts.append("\n")
+        elif tag in ("td", "th"):
+            self.parts.append("\t")  # keep table cells apart within their row's line
 
     def handle_endtag(self, tag):
         if tag in ("script", "style") and self.skip:
@@ -142,7 +144,8 @@ def html_text(raw):
         return ""
     parser = _TextExtractor()
     parser.feed(raw)
-    lines = [re.sub(r"[ \t ]+", " ", line).strip() for line in "".join(parser.parts).splitlines()]
+    lines = [re.sub(r" *\t[ \t]*", "\t", re.sub(r"[ \u00a0]+", " ", line)).strip(" \t")
+             for line in "".join(parser.parts).splitlines()]
     return "\n".join(line for line in lines if line)
 
 
