@@ -22,6 +22,7 @@ alone: anything Canvas does not export is inferred and reported with its evidenc
 | `tagging-bloom-levels` | Proposes a Bloom's level for every lecture, assignment, activity and lab, and checks that each outcome climbs | Planned |
 | `aligning-rubrics-to-outcomes` | Reads or drafts rubrics and links rubric to assignment to course outcome to program outcome | Planned |
 | `fixing-canvas-accessibility` | Scans every page, writes a fix plan, applies it, and repackages the course for import | Planned |
+| `updating-course-dates` | Moves last term's course to a new term: maps every deadline, unlock date and written date onto the new term's class meetings, skipping holidays, and repackages the course for import | Planned |
 | `reviewing-lecture-recordings` | Reads a lecture transcript and slide timeline, reports how the session went against its plan, what to improve, and examples given that no slide carries | Planned |
 
 ## Installing
