@@ -1,7 +1,7 @@
 {
   "name": "canvas-course-tools",
   "displayName": "Canvas Course Tools",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Read a Canvas course export and check its sequencing, Bloom levels, rubric and outcome alignment, and accessibility.",
   "author": {
     "name": "Daniel W. Goldberg",

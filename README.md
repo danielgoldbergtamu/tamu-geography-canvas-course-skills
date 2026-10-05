@@ -11,12 +11,13 @@ real course. They are written to run on any Canvas course, not only that one.
 
 ## Status
 
-This repository is in early development. No skill has been released yet. The table
-below shows what is planned and in what order.
+This repository is in early development. The table below shows what is available and
+what is planned, in the order it will be built. Every skill runs from the `.imscc` file
+alone: anything Canvas does not export is inferred and reported with its evidence.
 
 | Skill | What it does | Status |
 |---|---|---|
-| `reading-canvas-exports` | Turns a Canvas export into one `course_model.json` file that the other skills read | Planned, first |
+| `reading-canvas-exports` | Turns a Canvas export into one `course_model.json` file that the other skills read, inferring meeting times, holidays and time zone from the export itself | Available in 0.0.2 |
 | `checking-course-sequence` | Builds a graph of pages, assignments, lectures, activities and labs, and checks that nothing is due before it is taught | Planned, second |
 | `tagging-bloom-levels` | Proposes a Bloom's level for every lecture, assignment, activity and lab, and checks that each outcome climbs | Planned |
 | `aligning-rubrics-to-outcomes` | Reads or drafts rubrics and links rubric to assignment to course outcome to program outcome | Planned |
@@ -39,10 +40,10 @@ To get a newer version later, run `/plugin marketplace update`.
 - A Canvas course export. In Canvas, go to **Settings**, then **Export Course Content**,
   choose **Course**, and download the `.imscc` file.
 - Python 3.10 or later.
-- For the sequencing skill: the days and times your class meets, and the first and last
-  day of the term. A Canvas export does not contain these.
-- For the outcomes skill: your program-level learning outcomes. A Canvas export does not
-  contain these either.
+
+You do not need anything else. The skills read your meeting days, holidays and time zone from the export
+and the syllabus inside it, and say what they assumed. If an assumption is wrong, the
+skill tells you how to correct it.
 
 ## Your course data
 

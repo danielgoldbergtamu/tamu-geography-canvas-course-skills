@@ -1,0 +1,23 @@
+{
+  "skill_name": "reading-canvas-exports",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Here is my Canvas course export. What's in it, and when does the class meet?",
+      "files": ["examples/sample-course/sample-course.imscc"],
+      "expected_output": "Runs read_export.py without asking the user anything first. Reports 6 modules, 6 pages, 8 assignments, 1 quiz, 1 discussion, 3 rubrics and 6 outcomes. States the meeting pattern as Monday and Wednesday, 10:00 to 11:15, inferred from the syllabus with high confidence, and says office hours were ignored. Names the two cancelled meetings, 7 September and 25 November 2026. States the time zone as America/Chicago and the last day of term as 9 December 2026 with medium confidence, and says Canvas's later course end date was not used."
+    },
+    {
+      "id": 2,
+      "prompt": "Read this export. The class actually meets Tuesday and Thursday 9:00 to 10:15, not what the syllabus says.",
+      "files": ["examples/sample-course/sample-course.imscc"],
+      "expected_output": "Writes a settings file containing only the meetings override (days Tue and Thu, start 09:00, end 10:15) and reruns read_export.py with --settings. Reports the meeting pattern with source 'settings file'. Does not change the time zone or term end, and does not edit the export."
+    },
+    {
+      "id": 3,
+      "prompt": "Can you read my course export? It's at notes.txt",
+      "files": [],
+      "expected_output": "Runs the reader or checks the file and reports plainly that the file is not a Canvas export (not a zip), quoting the reader's message. Tells the user how to download an export from Canvas: Settings, Export Course Content, Course. Does not invent course contents."
+    }
+  ]
+}
