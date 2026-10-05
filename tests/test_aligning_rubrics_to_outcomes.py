@@ -113,6 +113,14 @@ class Writer(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
+    def test_tracked_sandbox_demo_matches_a_fresh_run(self):
+        demo = ROOT / "examples/sample-course"
+        fresh = pathlib.Path(self.tmp.name) / "fresh.imscc"
+        self.assertEqual(writer.main([str(demo / "sample-course.imscc"), str(demo / "rubric_plan.json"),
+                                      "--apply", "--out", str(fresh)]), 0)
+        self.assertEqual(fresh.read_bytes(), (demo / "sample-course.rubrics.imscc").read_bytes(),
+                         "sample-course.rubrics.imscc is stale: rerun write_rubrics.py with rubric_plan.json")
+
     def test_dry_run_writes_nothing(self):
         self.assertEqual(writer.main([str(self.src), str(self.plan)]), 0)
         self.assertFalse((pathlib.Path(self.tmp.name) / "course.rubrics.imscc").exists())

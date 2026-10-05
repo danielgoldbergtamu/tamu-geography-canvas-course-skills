@@ -208,10 +208,16 @@ def write(export, rubrics_xml, settings_edits, out_path):
         manifest = manifest.replace('<file href="course_settings/course_settings.xml"/>',
                                     '<file href="course_settings/course_settings.xml"/>\n      <file href="course_settings/rubrics.xml"/>', 1)
         files["imsmanifest.xml"] = manifest.encode("utf-8")
-    order = [i.filename for i in export.infos] + [n for n in files if n not in {i.filename for i in export.infos}]
+    # Every entry keeps the original's timestamp (new entries get a fixed one), so the same
+    # export and plan always produce the same bytes and a rebuild changes nothing.
+    infos = {i.filename: i for i in export.infos}
+    order = [i.filename for i in export.infos] + sorted(n for n in files if n not in infos)
     with zipfile.ZipFile(out_path, "w", zipfile.ZIP_DEFLATED) as zf:
         for name in order:
-            zf.writestr(name, files[name])
+            info = zipfile.ZipInfo(name, infos[name].date_time if name in infos else (1980, 1, 1, 0, 0, 0))
+            info.compress_type = zipfile.ZIP_DEFLATED
+            info.external_attr = infos[name].external_attr if name in infos else 0o644 << 16
+            zf.writestr(info, files[name])
 
 
 def main(argv=None):

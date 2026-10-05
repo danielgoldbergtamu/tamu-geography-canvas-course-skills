@@ -1,0 +1,17 @@
+{
+  "create": [
+    {"assignment_id": "a04", "title": "Lab 2 rubric",
+     "criteria": [
+       {"description": "Correct projection chosen", "points": 10,
+        "ratings": [{"description": "Full", "long_description": "Chooses a projection that preserves what the task measures and says why.", "points": 10},
+                    {"description": "Partial", "long_description": "Chooses a workable projection without a reason.", "points": 5},
+                    {"description": "None", "long_description": "No projection, or an unsuitable one.", "points": 0}]},
+       {"description": "Distortion explained", "points": 10,
+        "ratings": [{"description": "Full", "long_description": "Names the distortion and where it is largest.", "points": 10},
+                    {"description": "Partial", "long_description": "Mentions distortion without locating it.", "points": 5},
+                    {"description": "None", "long_description": "Does not discuss distortion.", "points": 0}]}],
+     "outcomes": ["o-clo2"]}
+  ],
+  "show_rating_levels": ["r02"],
+  "add_outcomes": [{"rubric_id": "r01", "outcome": "9002"}]
+}
