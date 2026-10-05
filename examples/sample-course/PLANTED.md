@@ -40,8 +40,14 @@ exactly what a skill should find. Change this file in the same commit as the bui
 | 13 | Page text disagrees with Canvas | Lecture 4 says the Project Proposal is due September 16; Canvas has 9 September | checking-course-sequence |
 | 14 | Image that is not in the export | Lecture 3 shows `projection.png`, which the export does not contain | checking-course-sequence, fixing-canvas-accessibility |
 | 15 | Link into one specific Canvas course | The Welcome page links to `canvas.example.edu/courses/12345/...` | checking-course-sequence |
+| 16 | One rubric reused at the wrong totals | The Project rubric's scored criteria add up to 20 points; it is attached to Project Proposal (30), Project Draft (40) and Final Project (100) | aligning-rubrics-to-outcomes |
+| 17 | Outcome criteria that change the score | The Lab rubric's PLO-METHOD criterion and the Project rubric's PLO-COMM criterion each count 10 points | aligning-rubrics-to-outcomes |
+| 18 | Course outcomes that roll up to nothing | No assignment measures CLO1 or CLO2 together with a program outcome | aligning-rubrics-to-outcomes |
 
 ## Correct patterns that must NOT be reported
+
+- CLO3 is measured together with PLO-COMM by three assignments, so the crosswalk proposes
+  CLO3 → PLO-COMM. That is a proposal, not a finding.
 
 - CLO3 climbs: Project Proposal (Describe: Understand), Project Draft (Analyze), Final
   Project (Evaluate, Recommend: Evaluate). It must not be reported as flat or falling.

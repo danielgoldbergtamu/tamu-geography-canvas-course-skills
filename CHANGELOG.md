@@ -10,6 +10,31 @@ numbers follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-05
+
+### Added
+
+- `aligning-rubrics-to-outcomes` skill. `audit_alignment.py` runs ten checks on the chain
+  from rubric to assignment to course outcome to program outcome: graded work with no
+  rubric, rubrics not used for grading, rubric totals that disagree with assignment
+  points (rounding gaps of a few cents are warnings), hidden rating levels, outcome
+  criteria that change the score, broken outcome links, assignments and outcomes that
+  measure or are measured by nothing, and course outcomes that roll up to nothing. It
+  proposes a course-to-program crosswalk from assignments that measure both, with a
+  `confirmed` column for the instructor.
+- `write_rubrics.py` writes a reviewed plan (new rubrics, outcome criteria, rating levels
+  shown, rubrics used for grading) into a new copy of the export, in the XML shape Canvas
+  writes in its own exports. Dry run by default; refuses a plan whose points do not add
+  up or that names anything the export lacks; never modifies the original.
+
+### Known limits
+
+- Files written by `write_rubrics.py` have been checked by re-reading and re-auditing
+  them, but not yet by importing one into Canvas. Import into a sandbox course first.
+- Tested on one real course, the inferred crosswalk recovered four of five designed
+  roll-ups, missed one that no assignment measures, and proposed four extra links
+  through capstone assignments that measure several outcomes at once.
+
 ## [0.2.0] - 2026-10-05
 
 ### Added

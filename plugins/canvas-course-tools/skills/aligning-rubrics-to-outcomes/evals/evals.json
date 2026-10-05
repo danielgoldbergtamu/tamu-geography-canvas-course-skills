@@ -1,0 +1,23 @@
+{
+  "skill_name": "aligning-rubrics-to-outcomes",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Are my rubrics attached and aligned to my outcomes?",
+      "files": ["examples/sample-course/sample-course.imscc"],
+      "expected_output": "Runs audit_alignment.py without asking anything first. Reports: Lab 2 and Participation 1 are graded with no rubric; the Project rubric adds up to 20 points but is attached to assignments worth 30, 40 and 100; the Lab rubric hides its rating levels; two outcome criteria count toward the score; CLO2 and Teamwork are measured by nothing; CLO1 and CLO2 roll up to no program outcome. Presents the crosswalk (CLO3 to PLO-COMM, through three assignments) as a proposal. Changes nothing."
+    },
+    {
+      "id": 2,
+      "prompt": "Make a rubric for Lab 2 that covers CLO2, then put it in the course.",
+      "files": ["examples/sample-course/sample-course.imscc"],
+      "expected_output": "Reads Lab 2's instructions, drafts rubric_plan.json with scored criteria adding to 20 points, rating levels with descriptions, and a CLO2 outcome criterion. Shows the drafted rubric to the user and waits for approval before applying. After approval, runs the dry run, then --apply, writes sample-course.rubrics.imscc beside the original, reruns the audit on the new file and reports that the Lab 2 and CLO2 findings are gone. States the original export was not modified."
+    },
+    {
+      "id": 3,
+      "prompt": "Which program outcomes does each course outcome feed?",
+      "files": ["examples/sample-course/sample-course.imscc"],
+      "expected_output": "Presents outcome_crosswalk.csv: CLO3 to PLO-COMM is proposed through three assignments; CLO1 and CLO2 have no program outcome measured alongside them; Teamwork's level could not be determined. Explains that Canvas has no course-to-program link, so these are inferred proposals for the instructor to confirm in the confirmed column."
+    }
+  ]
+}
