@@ -29,7 +29,7 @@ import sys
 import xml.etree.ElementTree as ET
 import zipfile
 
-SCHEMA_VERSION = "1.0"
+SCHEMA_VERSION = "1.1"
 
 # Time zones tried when inferring the course's zone. Canvas exports store every
 # date in UTC with no zone, so the zone is chosen by testing which candidate puts
@@ -144,6 +144,75 @@ def html_text(raw):
     parser.feed(raw)
     lines = [re.sub(r"[ \t ]+", " ", line).strip() for line in "".join(parser.parts).splitlines()]
     return "\n".join(line for line in lines if line)
+
+
+class _Links(html.parser.HTMLParser):
+    """Collect (href or src, link text) for every <a> and <img> in an HTML body."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.found, self.current = [], None
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == "a" and attrs.get("href"):
+            self.current = [attrs["href"], []]
+        elif tag in ("img", "iframe", "video", "audio", "source", "embed") and attrs.get("src"):
+            self.found.append((attrs["src"], attrs.get("alt") or attrs.get("title") or "", tag))
+
+    def handle_endtag(self, tag):
+        if tag == "a" and self.current:
+            self.found.append((self.current[0], "".join(self.current[1]).strip(), "a"))
+            self.current = None
+
+    def handle_data(self, data):
+        if self.current:
+            self.current[1].append(data)
+
+
+CANVAS_COURSE_URL = re.compile(r"^https?://[^/]+/courses/\d+(/|$)", re.I)
+
+
+def extract_links(raw):
+    """Classify every link in an HTML body. See references/course-model.md, 'links'."""
+    if not raw:
+        return []
+    parser = _Links()
+    parser.feed(raw)
+    out = []
+    for href, label, tag in parser.found:
+        h = html.unescape(href).strip()
+        kind, target = "web", h
+        m = re.match(r"\$(WIKI_REFERENCE|CANVAS_OBJECT_REFERENCE|CANVAS_COURSE_REFERENCE|IMS-CC-FILEBASE|IMS_CC_FILEBASE)\$/?(.*)$", h)
+        if m:
+            base, rest = m.group(1), m.group(2)
+            rest_path, _, anchor = rest.partition("#")
+            parts = [x for x in rest_path.split("?")[0].split("/") if x]
+            if base.startswith("IMS"):
+                from urllib.parse import unquote
+                kind, target = "file", "web_resources/" + unquote(rest_path.split("?")[0])
+            elif parts and parts[0] == "pages":
+                kind, target = "page", parts[1] if len(parts) > 1 else ""
+            elif parts and parts[0] in ("assignments", "quizzes", "discussion_topics", "modules", "files", "external_tools"):
+                kind = {"assignments": "assignment", "quizzes": "quiz", "discussion_topics": "discussion",
+                        "modules": "module", "files": "file_id", "external_tools": "external_tool"}[parts[0]]
+                target = parts[1] if len(parts) > 1 else ""
+            else:
+                kind, target = "canvas_other", rest
+            if anchor:
+                target = target + "#" + anchor
+        elif h.startswith("mailto:"):
+            kind = "mailto"
+        elif h.startswith("#"):
+            kind = "anchor"
+        elif CANVAS_COURSE_URL.match(h):
+            kind = "canvas_course_url"
+        elif not re.match(r"^[a-z][a-z0-9+.-]*:", h, re.I):
+            kind = "relative"
+        if tag in ("iframe", "video", "audio", "source", "embed") and kind in ("web", "canvas_course_url"):
+            kind = "embed"
+        out.append({"kind": kind, "target": target, "text": label, "tag": tag, "href": h})
+    return out
 
 
 def html_meta(raw):
@@ -484,6 +553,15 @@ def _weekday_of_header(cell):
     return days[0] if len(days) == 1 else None
 
 
+def syllabus_tables(raw):
+    """Every table in the syllabus as a list of rows, each a list of cell text."""
+    if not raw:
+        return []
+    parser = _Tables()
+    parser.feed(raw)
+    return [t for t in parser.tables if t]
+
+
 def find_cancellations(syllabus_raw, sessions):
     """Return {session date: evidence} for meetings the syllabus says will not happen."""
     if not sessions or not syllabus_raw:
@@ -587,6 +665,7 @@ def read_assignment(zf, folder, settings_name, tz_name):
         "position": int(number(text(a, "position")) or 0) or None,
         "href": html_name,
         "text": html_text(raw),
+        "links": extract_links(raw),
     }
 
 
@@ -614,6 +693,7 @@ def read_quiz(zf, folder, meta_name, resources, tz_name):
         "workflow_state": text(q, "workflow_state") or text(inner, "workflow_state"),
         "question_count": questions,
         "text": html_text(text(q, "description")),
+        "links": extract_links(text(q, "description")),
     }
 
 
@@ -630,7 +710,8 @@ def read_discussion(zf, ident, res, resources):
     return {"id": ident, "kind": kind, "title": title,
             "workflow_state": text(meta, "workflow_state"),
             "assignment": text(meta.find("assignment"), "title") if meta is not None and meta.find("assignment") is not None else None,
-            "text": html_text(text(topic, "text"))}
+            "text": html_text(text(topic, "text")),
+            "links": extract_links(text(topic, "text"))}
 
 
 def read_rubrics(zf):
@@ -796,7 +877,7 @@ def build_model(path, overrides=None):
                               "slug": pathlib.PurePosixPath(res["href"]).stem, "href": res["href"],
                               "workflow_state": meta.get("workflow_state"),
                               "front_page": meta.get("front_page") == "true" or None,
-                              "text": html_text(raw)})
+                              "text": html_text(raw), "links": extract_links(raw)})
             elif rtype.startswith("imsdt"):
                 discussions.append(read_discussion(zf, ident, res, resources))
             elif rtype.startswith("imswl") and res["files"]:
@@ -879,7 +960,8 @@ def build_model(path, overrides=None):
         "inferred": {"time_zone": tz_fact, "meetings": meetings_fact, "term_end": term_end,
                      "first_day": first_day.isoformat() if first_day else None},
         "sessions": sessions,
-        "syllabus": {"text": syllabus_text},
+        "syllabus": {"text": syllabus_text, "links": extract_links(syllabus_raw),
+                     "tables": syllabus_tables(syllabus_raw)},
         "modules": modules,
         "pages": sorted(pages, key=lambda p: p["href"] or ""),
         "assignments": assignments,

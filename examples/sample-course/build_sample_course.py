@@ -34,7 +34,9 @@ ASSIGNMENTS = [
 ]
 GROUPS = [("gA", "Participation", 1, 20.0), ("gB", "Labs", 2, 30.0), ("gC", "Project", 3, 50.0)]
 PAGES = [
-    ("p01", "welcome", "Welcome to SAMP 101", "active", "Start here. This course meets twice a week."),
+    ("p01", "welcome", "Welcome to SAMP 101", "active",
+     '<p>Start here. This course meets twice a week.</p>'
+     '<p>Read <a href="https://canvas.example.edu/courses/12345/pages/study-tips">the study tips page</a> before class.</p>'),
     ("p02", "lecture-1-what-is-a-coordinate", "Lecture 1: What Is a Coordinate?", "active",
      "Latitude, longitude and why a coordinate needs a datum."),
     ("p03", "lecture-2-datums", "Lecture 2: Datums", "active", "Datums and why two coordinates for one place can differ."),
@@ -45,7 +47,8 @@ PAGES = [
      '<p>For the projection table, <a href="https://epsg.org/">click here</a>.</p>'
      '<p><span style="color:#bbbbbb">Grey text that fails contrast.</span></p>'),
     ("p05", "lecture-4-writing-a-proposal", "Lecture 4: Writing a Proposal", "active",
-     "How to write a project proposal: question, data, method."),
+     '<p>How to write a project proposal: question, data, method.</p>'
+     '<p>The Project Proposal is due September 16.</p>'),
     ("p06", "instructor-notes", "Instructor Notes", "unpublished", "Not for students."),
 ]
 MODULES = [

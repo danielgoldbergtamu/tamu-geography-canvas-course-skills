@@ -35,6 +35,10 @@ exactly what a skill should find. Change this file in the same commit as the bui
 | 9 | Link text that does not say where it goes ("click here") | Lecture 3 page | fixing-canvas-accessibility |
 | 10 | Text that fails WCAG contrast (#bbbbbb on white) | Lecture 3 page | fixing-canvas-accessibility |
 | 11 | Dated work left unpublished | Project Draft, Final Project | checking-course-sequence |
+| 12 | Syllabus schedule disagrees with Canvas | The schedule lists Reading Response 1 under "Due Wednesday" in week 1 (26 Aug); Canvas has it due Sun 30 Aug | checking-course-sequence |
+| 13 | Page text disagrees with Canvas | Lecture 4 says the Project Proposal is due September 16; Canvas has 9 September | checking-course-sequence |
+| 14 | Image that is not in the export | Lecture 3 shows `projection.png`, which the export does not contain | checking-course-sequence, fixing-canvas-accessibility |
+| 15 | Link into one specific Canvas course | The Welcome page links to `canvas.example.edu/courses/12345/...` | checking-course-sequence |
 
 ## Correct patterns that must NOT be reported
 
@@ -42,3 +46,7 @@ exactly what a skill should find. Change this file in the same commit as the bui
   `ignore_for_scoring` true. That is the right way to link a rubric to an outcome without
   changing its total.
 - Instructor Notes is unpublished and in no module. It is not meant for students.
+- Project Draft (11 Nov) and Final Project (9 Dec) are 28 days apart, more than the
+  14-day revision gap.
+- Reading Response 2 is listed under "Due Wednesday" in the week of 7 Sep and is due
+  Wednesday 9 Sep. The schedule and Canvas agree.

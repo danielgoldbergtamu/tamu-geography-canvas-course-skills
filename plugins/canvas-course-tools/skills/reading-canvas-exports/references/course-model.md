@@ -1,8 +1,9 @@
 # course_model.json
 
 The file `scripts/read_export.py` writes. Every other skill in this plugin reads it.
-`schema_version` is `1.0`; a change that removes or renames a field raises the major
-number.
+`schema_version` is `1.1`. Adding a field raises the minor number; removing or renaming
+one raises the major number. Version 1.1 added `links` on every item and the syllabus,
+and `syllabus.tables`.
 
 ## Contents
 
@@ -10,6 +11,7 @@ number.
 - inferred
 - sessions
 - Items: pages, assignments, quizzes, discussions
+- links
 - modules
 - rubrics
 - outcomes and outcome_groups
@@ -24,7 +26,7 @@ number.
 | `course` | object | `title`, `code`, `start_at_utc`, `conclude_at_utc`, `default_view`, `group_weighting_scheme` |
 | `inferred` | object | Facts Canvas does not export. See below |
 | `sessions` | array | Every scheduled class meeting, including cancelled ones |
-| `syllabus` | object | `text`: the syllabus as plain text |
+| `syllabus` | object | `text`: the syllabus as plain text; `links` (see below); `tables`: every table as a list of rows, each a list of cell text, header row first |
 | `modules` | array | Modules in course order, each with its items |
 | `pages`, `assignments`, `quizzes`, `discussions` | arrays | Course content. See below |
 | `assignment_groups` | array | `id`, `title`, `position`, `weight` |
@@ -65,7 +67,7 @@ so a report can say a deadline falls on a day with no class.
 ## Items
 
 Every item has `id` (the Canvas identifier, which module items and rubrics refer to),
-`kind`, `title` and `text` (the body as plain text). Then:
+`kind`, `title`, `text` (the body as plain text) and `links` (see below). Then:
 
 - **pages**: `slug`, `href` (path inside the export), `workflow_state`, `front_page`.
 - **assignments**: `due_at_utc`, `due_local`, `unlock_at_utc`, `lock_at_utc`,
@@ -81,6 +83,23 @@ Every item has `id` (the Canvas identifier, which module items and rubrics refer
 
 `workflow_state` is Canvas's own word: `active` or `published` means students can see it,
 `unpublished` means they cannot.
+
+## links
+
+Every `<a>`, `<img>`, `<iframe>`, `<video>`, `<audio>`, `<source>` and `<embed>` in a body,
+in order: `kind`, `target`, `text` (the link text, or an image's alt text), `tag` and
+`href` (as written in the export).
+
+| `kind` | `target` |
+|---|---|
+| `page` | the page's identifier or URL name (Canvas writes either) |
+| `assignment`, `quiz`, `discussion`, `module`, `external_tool` | the identifier |
+| `file` | the path inside the export, starting `web_resources/` |
+| `canvas_course_url` | a full web address into one particular Canvas course |
+| `embed` | a web address shown inside the page (video, slides) |
+| `web`, `mailto`, `anchor`, `relative`, `canvas_other` | the address as written |
+
+An anchor (`#section`) is kept on the end of `target`.
 
 ## modules
 

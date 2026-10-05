@@ -1,0 +1,23 @@
+{
+  "skill_name": "checking-course-sequence",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Is anything in this course due before we cover it in class? Here's the export.",
+      "files": ["examples/sample-course/sample-course.imscc"],
+      "expected_output": "Runs check_sequence.py on the export without asking for meeting days or dates. Reports the assumptions first (America/Chicago; Mon/Wed 10:00-11:15; cancelled 7 Sep and 25 Nov 2026). Answers the question directly: Project Proposal is due Wed 9 Sep 2026, before the first class of week 4 (Mon 14 Sep), the week of its module. Also lists the other defects: the Lecture 4 page says the proposal is due 16 Sep; the syllabus schedule lists Reading Response 1 for 26 Aug but Canvas has 30 Aug; Lecture 3 shows an image missing from the export; Participation 1 is worth points with nothing to submit and no rubric. Names where the report, findings and graph files were written. Does not change the course."
+    },
+    {
+      "id": 2,
+      "prompt": "Do the dates in my syllabus match Canvas?",
+      "files": ["examples/sample-course/sample-course.imscc"],
+      "expected_output": "Reports check 1 results: Reading Response 1 (syllabus schedule 26 Aug, Canvas 30 Aug) and Project Proposal (Lecture 4 page 16 Sep, Canvas 9 Sep). States that Reading Response 2 matches. States what check 1 does not catch, such as dates written without the word 'due' or relative dates."
+    },
+    {
+      "id": 3,
+      "prompt": "Give me a week-by-week view of this course.",
+      "files": ["examples/sample-course/sample-course.imscc"],
+      "expected_output": "Presents the Timeline section of sequence_report.md: one row per week with meetings (cancelled ones marked), the week's modules and what is due. Mentions course_graph.json as the machine-readable graph."
+    }
+  ]
+}
