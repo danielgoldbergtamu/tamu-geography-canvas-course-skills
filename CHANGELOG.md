@@ -10,6 +10,22 @@ numbers follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-10-05
+
+### Fixed
+
+- `checking-course-sequence` counted "due soon" from the UTC date the export was read.
+  In the evening in the Americas that is already tomorrow, so deadlines were counted
+  from the wrong day. It now uses the date in the course's own time zone.
+- `aligning-rubrics-to-outcomes`: the rubric writer keeps each entry's timestamp, so
+  the same export and plan always produce the same file.
+
+### Added
+
+- `examples/sample-course/SANDBOX_TEST.md`, `rubric_plan.json` and
+  `sample-course.rubrics.imscc`: a file and five checks for verifying the rubric writer
+  by importing into a blank sandbox Canvas course.
+
 ## [0.3.0] - 2026-10-05
 
 ### Added

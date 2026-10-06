@@ -115,6 +115,13 @@ class EachCheckCanFire(unittest.TestCase):
         self.assertIn(("2", "Welcome to SAMP 101"), found(run(m), "defect"))
 
 
+class CountedFrom(unittest.TestCase):
+    def test_evening_in_central_time_is_still_today(self):
+        m = copy.deepcopy(MODEL)
+        m["source"]["read_at"] = "2026-10-06T03:30:00+00:00"   # 10:30 PM Mon 5 Oct in Chicago
+        self.assertEqual(seq.Checker(m).as_of, dt.date(2026, 10, 5))
+
+
 class WhenFactsAreMissing(unittest.TestCase):
     def test_no_meetings_means_not_run(self):
         m = copy.deepcopy(MODEL)

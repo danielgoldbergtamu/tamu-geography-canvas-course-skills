@@ -88,8 +88,7 @@ def title_pattern(title):
 class Checker:
     def __init__(self, model, as_of=None):
         self.m = model
-        read = (model.get("source") or {}).get("read_at")
-        self.as_of = as_of or (dt.datetime.fromisoformat(read).date() if read else dt.date.today())
+        self.as_of = as_of or self.read_date(model)
         self.findings = []
         self.status = {}
         inf = model["inferred"]
@@ -108,6 +107,28 @@ class Checker:
                     self.module_of.setdefault(it["ref"], mod)
         self.year = (self.first_day or dt.date.today()).year
         self.patterns = [(x, title_pattern(x["title"])) for x in self.dated if len(norm(x["title"])) >= 5]
+
+    @staticmethod
+    def read_date(model):
+        """The local date in the course's time zone when the export was read.
+
+        read_at is UTC. In the evening in the Americas the UTC date is already
+        tomorrow, so taking its date counted deadlines from the wrong day.
+        """
+        read = (model.get("source") or {}).get("read_at")
+        if not read:
+            return dt.date.today()
+        when = dt.datetime.fromisoformat(read)
+        tz_name = model["inferred"]["time_zone"].get("value")
+        try:
+            from zoneinfo import ZoneInfo
+            return when.astimezone(ZoneInfo(tz_name)).date() if tz_name else when.date()
+        except Exception:
+            # No time-zone database (Windows without tzdata): use the offset of the
+            # nearest dated item, which the reader already converted correctly.
+            offsets = [dt.datetime.fromisoformat(x["due_local"]).utcoffset() for x in
+                       model["assignments"] + model["quizzes"] if x.get("due_local")]
+            return (when + offsets[0]).date() if offsets else when.date()
 
     # ------------------------------------------------------------ weeks
     def week_of(self, day):
