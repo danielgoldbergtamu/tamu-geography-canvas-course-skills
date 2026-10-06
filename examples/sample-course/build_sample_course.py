@@ -46,7 +46,9 @@ GROUPS = [("gA", "Participation", 1, 20.0), ("gB", "Labs", 2, 30.0), ("gC", "Pro
 PAGES = [
     ("p01", "welcome", "Welcome to SAMP 101", "active",
      '<p>Start here. This course meets twice a week.</p>'
-     '<p>Read <a href="https://canvas.example.edu/courses/12345/pages/study-tips">the study tips page</a> before class.</p>'),
+     '<p>Read <a href="https://canvas.example.edu/courses/12345/pages/study-tips">the study tips page</a> before class.</p>'
+     '<table><tr><td>Week</td><td>Topic</td></tr><tr><td>1</td><td>Coordinates</td></tr><tr><td>2</td><td>Datums</td></tr></table>'
+     '<iframe src="https://www.youtube.com/embed/abc123"></iframe>'),
     ("p02", "lecture-1-what-is-a-coordinate", "Lecture 1: What Is a Coordinate?", "active",
      '<p>Latitude, longitude and why a coordinate needs a datum.</p>'
      '<h3>Learning objectives</h3><p>By the end of this lecture you will be able to:</p>'
@@ -59,7 +61,7 @@ PAGES = [
      '<h3>Learning objectives</h3><ul><li>Distinguish conformal from equal-area projections</li>'
      '<li>Justify a projection choice for a given task</li></ul>'
      '<img src="$IMS-CC-FILEBASE$/projection.png">'
-     '<h4>Further reading</h4>'
+     '<h5>Further reading</h5>'
      '<p>For the projection table, <a href="https://epsg.org/">click here</a>.</p>'
      '<p><span style="color:#bbbbbb">Grey text that fails contrast.</span></p>'),
     ("p05", "lecture-4-writing-a-proposal", "Lecture 4: Writing a Proposal", "active",

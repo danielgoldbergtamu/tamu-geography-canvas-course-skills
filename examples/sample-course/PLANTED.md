@@ -32,7 +32,7 @@ exactly what a skill should find. Change this file in the same commit as the bui
 | 6 | An outcome that does not climb | CLO1 is measured by Reading Response 1 (Summarize: Understand) and Reading Response 2 (Explain: Understand), so it never moves above Understand | tagging-bloom-levels |
 | 6a | Items with no usable verb | Lecture 2, Lecture 4, Lab 2: Projections, Participation 1, the Projection Check quiz and the datum discussion must come out **unknown** and be listed for a person to decide; none may be guessed. The Welcome page is a general page and must not be warned about | tagging-bloom-levels |
 | 7 | Image with no alt text | Lecture 3 page | fixing-canvas-accessibility |
-| 8 | Skipped heading level (h2 then h4) | Lecture 3 page | fixing-canvas-accessibility |
+| 8 | Skipped heading level (h3 then h5) | Lecture 3 page: "Further reading" is an h5 under the h3 "Learning objectives" | fixing-canvas-accessibility |
 | 9 | Link text that does not say where it goes ("click here") | Lecture 3 page | fixing-canvas-accessibility |
 | 10 | Text that fails WCAG contrast (#bbbbbb on white) | Lecture 3 page | fixing-canvas-accessibility |
 | 11 | Dated work left unpublished | Project Draft, Final Project | checking-course-sequence |
@@ -42,7 +42,10 @@ exactly what a skill should find. Change this file in the same commit as the bui
 | 15 | Link into one specific Canvas course | The Welcome page links to `canvas.example.edu/courses/12345/...` | checking-course-sequence |
 | 16 | One rubric reused at the wrong totals | The Project rubric's scored criteria add up to 20 points; it is attached to Project Proposal (30), Project Draft (40) and Final Project (100) | aligning-rubrics-to-outcomes |
 | 17 | Outcome criteria that change the score | The Lab rubric's PLO-METHOD criterion and the Project rubric's PLO-COMM criterion each count 10 points | aligning-rubrics-to-outcomes |
+| 19 | Table with no header cells or caption | The Welcome page's week-and-topic table | fixing-canvas-accessibility |
+| 20 | Embedded video with no title | The Welcome page's YouTube frame | fixing-canvas-accessibility |
 | 18 | Course outcomes that roll up to nothing | No assignment measures CLO1 or CLO2 together with a program outcome | aligning-rubrics-to-outcomes |
+| 21 | Header cells with no scope, tables with no caption | The syllabus schedule table and the Lecture 1 objectives table (written without them by this builder) | fixing-canvas-accessibility |
 
 ## Correct patterns that must NOT be reported
 

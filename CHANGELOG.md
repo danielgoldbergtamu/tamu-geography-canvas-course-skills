@@ -10,6 +10,23 @@ numbers follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-05
+
+### Added
+
+- `fixing-canvas-accessibility`: scans every HTML page in an export (pages, syllabus,
+  assignment descriptions) against 17 rules tied to WCAG 2.1 success criteria, writes
+  `a11y_report.md` and a fix plan, and applies the plan to a new
+  `COURSE.accessible.imscc`. Heading levels, header-cell scope and failing text colors
+  are fixed automatically (a color keeps its hue and changes only as much lightness as
+  passing needs). Table captions, header rows and embed titles are proposed for review.
+  Alt text and link text are left for a person, or drafted by Claude for the person to
+  approve. The fixer refuses a plan from a different export, a plan with empty values,
+  and any fix whose element has changed since the scan, and it changes nothing outside
+  the named elements. The report lists what the scan does not check, such as PDFs.
+- The sample course now plants a table with no header row, an untitled video embed, and
+  header cells with no scope (PLANTED.md cases 19 to 21).
+
 ## [0.3.1] - 2026-10-05
 
 ### Fixed

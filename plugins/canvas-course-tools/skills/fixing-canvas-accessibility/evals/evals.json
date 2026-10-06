@@ -1,0 +1,23 @@
+{
+  "skill_name": "fixing-canvas-accessibility",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Check my Canvas course for accessibility problems.",
+      "files": ["examples/sample-course/sample-course.imscc"],
+      "expected_output": "Runs scan_a11y.py without asking anything first. Reports 15 findings on 15 pages, including the image with no alt text, the h5 that skips a level, the 'click here' link and the #bbbbbb text on Lecture 3, the Welcome page's table with no header and its untitled YouTube embed, and the header cells without scope in the syllabus and Lecture 1 tables. Lists the Not checked section. Changes nothing."
+    },
+    {
+      "id": 2,
+      "prompt": "Fix everything you can and give me a course I can import.",
+      "files": ["examples/sample-course/sample-course.imscc"],
+      "expected_output": "Scans, fills the plan: looks at projection.png to write its alt text, writes descriptive text for the 'click here' link, reviews the proposed captions and embed title. Shows these as a numbered list and waits for approval. After approval, runs the dry run, then --apply, writes sample-course.accessible.imscc, rescans it and reports zero findings. Says the original was not changed and recommends importing into a sandbox course first."
+    },
+    {
+      "id": 3,
+      "prompt": "Just apply the automatic fixes; I'll do the alt text myself later.",
+      "files": ["examples/sample-course/sample-course.imscc"],
+      "expected_output": "Runs fix_a11y.py with --skip-unfilled (or sets the needs_value entries to skip), applies the automatic and proposed fixes after showing the proposed ones, rescans, and lists exactly which findings remain for the user: the alt text and link text."
+    }
+  ]
+}
